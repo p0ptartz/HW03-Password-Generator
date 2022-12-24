@@ -9,19 +9,24 @@ var newPassword = [];
 
 
 function generatePassword() {
-  newPassword = [];
+
+  //  took me hours to figure out to put this empty variable WITHIN the function to allow password to reset on each click :|
+  var password = "";
+
+  // variable to prompt users to choose character length
   var passwordChoice = window.prompt("How many characters would you like your password to be??");
   if (passwordChoice < 8 || passwordChoice > 128) {
     window.alert("Please choose between 8 and 128 characters!!");
     return "BETTER LUCK NEXT TIME";
   }
+  // giving user a list of possible character choises for their password
   else {
     var lower = window.confirm("Would you like to use lower case letters??");
     var upper = window.confirm("Would you like to use UPPER case letters??");
     var useNumbers = window.confirm("Would you like to use numbers??");
     var special = window.confirm("Would you like to use SPECIAL characters??");
   }
-
+  //  storing the choices into a new variable
   if (lower === true) {
     newPassword = newPassword.concat(lowerCase);
   }
@@ -35,27 +40,31 @@ function generatePassword() {
     newPassword = newPassword.concat(specialChar);
 
   }
+  // alerting users they must choose at least ONE character type
   else if
     (lower === false && upper === false && useNumbers === false && special === false) {
     window.alert("YOU MUST CHOOSE AT LEAST ONE CHARACTER TYPE")
   }
-  console.log(newPassword)
-  return ""
+  // loop to run the length of characters user input in the window prompt 
+  for (var i = 0; i < passwordChoice; i++) {
+    // storing randomized output into new variable
+    var randomPassword = [Math.floor(Math.random() * newPassword.length)];
+    // concatenates the user choice characters with randomized index and stores in own variable
+    password = password.concat(newPassword[randomPassword])
+
+  }
+  // return variable for stored password
+  return password;
 }
 
-// return variable for stored password
 
-
-
-
-// Write password to the #password input
+// runs function to start the generating of password
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
+  // changes the placeholder text to user output
   passwordText.value = password;
-
 }
 
-// Add event listener to generate button
+// takes control of HTML btn and activates on click 
 generateBtn.addEventListener("click", writePassword);

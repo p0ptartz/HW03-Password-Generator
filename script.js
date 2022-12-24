@@ -19,6 +19,12 @@ function generatePassword() {
     window.alert("Please choose between 8 and 128 characters!!");
     return "BETTER LUCK NEXT TIME";
   }
+  if (isNaN(passwordChoice)) {
+
+    window.alert("Please input numerical value!!");
+    return "BETTER LUCK NEXT TIME";
+
+  }
   // giving user a list of possible character choises for their password
   else {
     var lower = window.confirm("Would you like to use lower case letters??");
